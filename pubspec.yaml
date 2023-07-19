@@ -8,13 +8,16 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  custom_lint: ^0.5.0
+  custom_lint_builder: ^0.5.0
   flutter:
     sdk: flutter
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+
+  solid_lints: ^0.0.16
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
