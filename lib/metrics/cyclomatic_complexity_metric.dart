@@ -2,20 +2,9 @@ library cyclomatic_complexity_metric;
 
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
-import 'package:cyclomatic_complexity_metric/visitor/cyclomatic_complexity_visitor.dart';
+import 'package:solid_metrics/visitor/cyclomatic_complexity_visitor.dart';
 
-/// creates plugin
-PluginBase createPlugin() => _SolidMetricsLinter();
-
-/// Solid metric linter
-class _SolidMetricsLinter extends PluginBase {
-  @override
-  List<LintRule> getLintRules(CustomLintConfigs configs) => [
-        const CyclomaticComplexityMetric(),
-      ];
-}
-
-/// A Complexity metric.
+/// A Complexity metric checks content of block and detects more easier solution
 class CyclomaticComplexityMetric extends DartLintRule {
   static const _lintCode = LintCode(
     name: 'cyclomatic_complexity_metric',

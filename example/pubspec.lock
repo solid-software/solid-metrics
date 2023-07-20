@@ -137,13 +137,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.0"
-  cyclomatic_complexity_metric:
-    dependency: "direct dev"
-    description:
-      path: ".."
-      relative: true
-    source: path
-    version: "0.0.1"
   dart_style:
     dependency: transitive
     description:
@@ -370,6 +363,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  solid_metrics:
+    dependency: "direct dev"
+    description:
+      path: ".."
+      relative: true
+    source: path
+    version: "0.0.1"
   source_map_stack_trace:
     dependency: transitive
     description:
