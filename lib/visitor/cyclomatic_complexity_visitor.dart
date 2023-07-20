@@ -4,7 +4,7 @@ import 'package:analyzer/dart/ast/token.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 
 /// Cyclomatic flow visitor
-class ComplexityMetricFlowVisitor extends RecursiveAstVisitor<void> {
+class CyclomaticComplexityVisitor extends RecursiveAstVisitor<void> {
   static const _complexityTokenTypes = [
     TokenType.AMPERSAND_AMPERSAND,
     TokenType.BAR_BAR,
@@ -102,7 +102,7 @@ class ComplexityMetricFlowVisitor extends RecursiveAstVisitor<void> {
   }
 
   void _visitBlock(Token? firstToken, Token? lastToken) {
-    var token = firstToken;
+    Token? token = firstToken;
     while (token != lastToken && token != null) {
       if (token.matchesAny(_complexityTokenTypes)) {
         _increaseComplexity(token);
