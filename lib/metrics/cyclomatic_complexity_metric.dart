@@ -31,12 +31,15 @@ class CyclomaticComplexityMetric extends DartLintRule {
   ) {
     final visitor = CyclomaticComplexityVisitor();
 
-    context.registry.addBlockFunctionBody((node) {
-      node.visitChildren(visitor);
+    if ((additionalParameters['enabled'] as bool?) ?? true) {
+      context.registry.addBlockFunctionBody((node) {
+        node.visitChildren(visitor);
 
-      if (visitor.complexityEntities.length + 1 > _minValue) {
-        reporter.reportErrorForNode(lintCode, node);
-      }
-    });
+        if (visitor.complexityEntities.length + 1 >
+            ((additionalParameters['min_complexity'] as int?) ?? _minValue)) {
+          reporter.reportErrorForNode(lintCode, node);
+        }
+      });
+    }
   }
 }
