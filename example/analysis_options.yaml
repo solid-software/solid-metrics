@@ -21,7 +21,6 @@ custom_lint:
   rules:
     - cyclomatic_complexity_metric:
       min_complexity: 4
-      enabled: true
 
 # analyzer:
 #   exclude:

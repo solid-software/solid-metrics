@@ -2,6 +2,7 @@ library cyclomatic_complexity_metric;
 
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:solid_metrics/models/cyclomatic_complexity_parameters.dart';
 import 'package:solid_metrics/visitor/cyclomatic_complexity_visitor.dart';
 
 /// A Complexity metric checks content of block and detects more easier solution
@@ -13,7 +14,7 @@ class CyclomaticComplexityMetric extends DartLintRule {
   );
 
   /// Additional parameteres
-  final Map<String, Object?> additionalParameters;
+  final CyclomaticComplexityParameters additionalParameters;
 
   static const _minValue = 2;
 
@@ -31,15 +32,13 @@ class CyclomaticComplexityMetric extends DartLintRule {
   ) {
     final visitor = CyclomaticComplexityVisitor();
 
-    if ((additionalParameters['enabled'] as bool?) ?? true) {
-      context.registry.addBlockFunctionBody((node) {
-        node.visitChildren(visitor);
+    context.registry.addBlockFunctionBody((node) {
+      node.visitChildren(visitor);
 
-        if (visitor.complexityEntities.length + 1 >
-            ((additionalParameters['min_complexity'] as int?) ?? _minValue)) {
-          reporter.reportErrorForNode(lintCode, node);
-        }
-      });
-    }
+      if (visitor.complexityEntities.length + 1 >
+          (additionalParameters.minComplexity ?? _minValue)) {
+        reporter.reportErrorForNode(lintCode, node);
+      }
+    });
   }
 }
