@@ -1,6 +1,8 @@
 /// Check complexity fail
 int calculate() {
-  if (true && true) {}
+  if (true) {
+    if (true) {}
+  }
 
   return 6 * 7;
 }
