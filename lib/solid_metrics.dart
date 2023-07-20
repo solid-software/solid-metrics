@@ -8,8 +8,22 @@ PluginBase createPlugin() => _SolidMetrics();
 
 /// Solid metric linter
 class _SolidMetrics extends PluginBase {
+  /// Get params of lint rule
+  Map<String, Object?>? _getParamsForLintRule(
+    CustomLintConfigs configs,
+    String code,
+  ) {
+    return configs.rules[code]?.json;
+  }
+
   @override
   List<LintRule> getLintRules(CustomLintConfigs configs) => [
-        const CyclomaticComplexityMetric(),
+        CyclomaticComplexityMetric(
+          additionalParameters: _getParamsForLintRule(
+                configs,
+                CyclomaticComplexityMetric.lintCode.name,
+              ) ??
+              {},
+        ),
       ];
 }

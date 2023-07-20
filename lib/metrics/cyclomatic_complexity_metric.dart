@@ -6,15 +6,22 @@ import 'package:solid_metrics/visitor/cyclomatic_complexity_visitor.dart';
 
 /// A Complexity metric checks content of block and detects more easier solution
 class CyclomaticComplexityMetric extends DartLintRule {
-  static const _lintCode = LintCode(
+  /// lint code of metric
+  static const lintCode = LintCode(
     name: 'cyclomatic_complexity_metric',
     problemMessage: 'Check complexity',
   );
 
+  /// Additional parameteres
+  final Map<String, Object?> additionalParameters;
+
   static const _minValue = 2;
 
   /// Creates a new instance of [CyclomaticComplexityMetric].
-  const CyclomaticComplexityMetric({super.code = _lintCode});
+  const CyclomaticComplexityMetric({
+    super.code = lintCode,
+    required this.additionalParameters,
+  });
 
   @override
   void run(
@@ -28,7 +35,7 @@ class CyclomaticComplexityMetric extends DartLintRule {
       node.visitChildren(visitor);
 
       if (visitor.complexityEntities.length + 1 > _minValue) {
-        reporter.reportErrorForNode(_lintCode, node);
+        reporter.reportErrorForNode(lintCode, node);
       }
     });
   }
