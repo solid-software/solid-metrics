@@ -11,7 +11,8 @@ class CyclomaticComplexityMetric extends DartLintRule {
   /// reaches maximum value.
   static const lintCode = LintCode(
     name: 'cyclomatic_complexity_metric',
-    problemMessage: 'Check complexity',
+    problemMessage:
+        'Please decrease the complexity of function to a minimum value',
   );
 
   /// The additional parameters for this metric.
