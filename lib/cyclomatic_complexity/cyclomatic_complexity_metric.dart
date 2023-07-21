@@ -7,7 +7,8 @@ import 'package:solid_metrics/cyclomatic_complexity/visitor/cyclomatic_complexit
 
 /// A Complexity metric checks content of block and detects more easier solution
 class CyclomaticComplexityMetric extends DartLintRule {
-  /// The [LintCode] of this lint rule that represents the error.
+  /// The [LintCode] of this lint rule that represents the error if complexity
+  /// reaches maximum value.
   static const lintCode = LintCode(
     name: 'cyclomatic_complexity_metric',
     problemMessage: 'Check complexity',
@@ -15,8 +16,6 @@ class CyclomaticComplexityMetric extends DartLintRule {
 
   /// The additional parameters for this metric.
   final CyclomaticComplexityParameters additionalParameters;
-
-  static const _defaultMaxComplexity = 2;
 
   /// Creates a new instance of [CyclomaticComplexityMetric].
   const CyclomaticComplexityMetric({
@@ -35,10 +34,8 @@ class CyclomaticComplexityMetric extends DartLintRule {
     context.registry.addBlockFunctionBody((node) {
       node.visitChildren(visitor);
 
-      final maxComplexity =
-          additionalParameters.minComplexity ?? _defaultMaxComplexity;
-
-      if (visitor.complexityEntities.length + 1 > maxComplexity) {
+      if (visitor.complexityEntities.length + 1 >
+          additionalParameters.maxComplexity) {
         reporter.reportErrorForNode(lintCode, node);
       }
     });
