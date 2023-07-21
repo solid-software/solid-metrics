@@ -17,9 +17,10 @@ analyzer:
     - custom_lint
 # Uncomment the following section to specify additional rules.
 
-# linter:
-#   rules:
-#     - camel_case_types
+custom_lint:
+  rules:
+    - cyclomatic_complexity_metric:
+      max_complexity: 4
 
 # analyzer:
 #   exclude:
