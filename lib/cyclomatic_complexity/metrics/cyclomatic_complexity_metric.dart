@@ -3,7 +3,7 @@ library cyclomatic_complexity_metric;
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:solid_metrics/cyclomatic_complexity/models/cyclomatic_complexity_parameters.dart';
-import 'package:solid_metrics/cyclomatic_complexity/visitor/cyclomatic_complexity_visitor.dart';
+import 'package:solid_metrics/cyclomatic_complexity/visitor/cyclomatic_complexity_flow_visitor.dart';
 
 /// A Complexity metric checks content of block and detects more easier solution
 class CyclomaticComplexityMetric extends DartLintRule {
@@ -30,7 +30,7 @@ class CyclomaticComplexityMetric extends DartLintRule {
     ErrorReporter reporter,
     CustomLintContext context,
   ) {
-    final visitor = CyclomaticComplexityVisitor();
+    final visitor = CyclomaticComplexityFlowVisitor();
 
     context.registry.addBlockFunctionBody((node) {
       node.visitChildren(visitor);
