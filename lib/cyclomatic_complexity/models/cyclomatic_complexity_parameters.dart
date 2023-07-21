@@ -1,4 +1,5 @@
-/// A data model class that represents the cyclomatic complexity input paramters.
+/// A data model class that represents the cyclomatic complexity input
+/// paramters.
 class CyclomaticComplexityParameters {
   /// Min value of complexity level
   final int maxComplexity;

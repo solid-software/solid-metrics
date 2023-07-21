@@ -13,20 +13,26 @@ class _SolidMetrics extends PluginBase {
   List<LintRule> getLintRules(CustomLintConfigs configs) {
     final List<LintRule> rules = [];
 
-    if (configs.rules[CyclomaticComplexityMetric.lintCode.name]?.enabled ??
-        false) {
+    if (configs.rules[CyclomaticComplexityMetric.lintName]?.enabled ?? false) {
       final complexityMetricParameters =
           CyclomaticComplexityParameters.fromJson(
         _getParamsForLintRule(
               configs,
-              CyclomaticComplexityMetric.lintCode.name,
+              CyclomaticComplexityMetric.lintName,
             ) ??
             {},
+      );
+
+      final lintCode = LintCode(
+        name: 'cyclomatic_complexity_metric',
+        problemMessage:
+            'Please decrease the complexity of function to a minimum value ${complexityMetricParameters.maxComplexity}',
       );
 
       rules.add(
         CyclomaticComplexityMetric(
           additionalParameters: complexityMetricParameters,
+          code: lintCode,
         ),
       );
     }

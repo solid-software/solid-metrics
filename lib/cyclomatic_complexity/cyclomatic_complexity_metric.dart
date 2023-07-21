@@ -9,19 +9,15 @@ import 'package:solid_metrics/cyclomatic_complexity/visitor/cyclomatic_complexit
 class CyclomaticComplexityMetric extends DartLintRule {
   /// The [LintCode] of this lint rule that represents the error if complexity
   /// reaches maximum value.
-  static const lintCode = LintCode(
-    name: 'cyclomatic_complexity_metric',
-    problemMessage:
-        'Please decrease the complexity of function to a minimum value',
-  );
+  static const lintName = 'cyclomatic_complexity_metric';
 
   /// The additional parameters for this metric.
   final CyclomaticComplexityParameters additionalParameters;
 
   /// Creates a new instance of [CyclomaticComplexityMetric].
   const CyclomaticComplexityMetric({
-    super.code = lintCode,
     required this.additionalParameters,
+    required super.code,
   });
 
   @override
@@ -37,7 +33,7 @@ class CyclomaticComplexityMetric extends DartLintRule {
 
       if (visitor.complexityEntities.length + 1 >
           additionalParameters.maxComplexity) {
-        reporter.reportErrorForNode(lintCode, node);
+        reporter.reportErrorForNode(code, node);
       }
     });
   }
