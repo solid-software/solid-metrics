@@ -1,4 +1,4 @@
-/// Complexity input parameters
+/// A data model class that represents the cyclomatic complexity input paramters.
 class CyclomaticComplexityParameters {
   /// Min value of complexity level
   final int? minComplexity;
@@ -9,6 +9,6 @@ class CyclomaticComplexityParameters {
   /// Method for creating from json data
   factory CyclomaticComplexityParameters.fromJson(Map<String, Object?> json) =>
       CyclomaticComplexityParameters(
-        minComplexity: json['min_complexity'] as int?,
+        minComplexity: json['max_complexity'] as int?,
       );
 }

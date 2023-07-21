@@ -2,21 +2,21 @@ library cyclomatic_complexity_metric;
 
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
-import 'package:solid_metrics/models/cyclomatic_complexity_parameters.dart';
-import 'package:solid_metrics/visitor/cyclomatic_complexity_visitor.dart';
+import 'package:solid_metrics/cyclomatic_complexity/models/cyclomatic_complexity_parameters.dart';
+import 'package:solid_metrics/cyclomatic_complexity/visitor/cyclomatic_complexity_visitor.dart';
 
 /// A Complexity metric checks content of block and detects more easier solution
 class CyclomaticComplexityMetric extends DartLintRule {
-  /// lint code of metric
+  /// The [LintCode] of this lint rule that represents the error.
   static const lintCode = LintCode(
     name: 'cyclomatic_complexity_metric',
     problemMessage: 'Check complexity',
   );
 
-  /// Additional parameteres
+  /// The additional parameters for this metric.
   final CyclomaticComplexityParameters additionalParameters;
 
-  static const _minValue = 2;
+  static const _defaultMaxComplexity = 2;
 
   /// Creates a new instance of [CyclomaticComplexityMetric].
   const CyclomaticComplexityMetric({
@@ -35,8 +35,10 @@ class CyclomaticComplexityMetric extends DartLintRule {
     context.registry.addBlockFunctionBody((node) {
       node.visitChildren(visitor);
 
-      if (visitor.complexityEntities.length + 1 >
-          (additionalParameters.minComplexity ?? _minValue)) {
+      final maxComplexity =
+          additionalParameters.minComplexity ?? _defaultMaxComplexity;
+
+      if (visitor.complexityEntities.length + 1 > maxComplexity) {
         reporter.reportErrorForNode(lintCode, node);
       }
     });
