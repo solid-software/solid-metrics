@@ -13,7 +13,12 @@ class _SolidMetrics extends PluginBase {
   List<LintRule> getLintRules(CustomLintConfigs configs) {
     final List<LintRule> rules = [];
 
-    if (configs.rules[CyclomaticComplexityMetric.lintName]?.enabled ?? false) {
+    final cyclomaticComplexityRule =
+        configs.rules[CyclomaticComplexityMetric.lintName];
+    final cyclomaticComplexityEnabled =
+        cyclomaticComplexityRule?.enabled ?? false;
+
+    if (cyclomaticComplexityEnabled) {
       final complexityMetricParameters =
           CyclomaticComplexityParameters.fromJson(
         _getParamsForLintRule(
